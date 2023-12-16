@@ -5,6 +5,7 @@ import games
 
 
 TITLE = "Блек Джек"
+ICON = "black-jack.png"
 
 
 class BJ_Card(cards.Positionable_Card):
@@ -187,7 +188,7 @@ class BJ_Game:
 
 
 def main():
-    gui.msgbox("Ласкаво просимо до гри Блек-джек!", TITLE)
+    gui.msgbox("Ласкаво просимо до гри Блек-джек!", TITLE, image=ICON)
 
     names = []
     number = games.ask_number("Скільки всього гравців? (1 - 7): ", low=1, high=7)
