@@ -1,3 +1,5 @@
+import easygui as gui
+
 class Card:
     """Одна гральна карта"""
     RANKS = [
@@ -86,28 +88,28 @@ class Deck(Hand):
                 self.give(top_card,  hand)
                 
 if __name__ == "__main__":
-    print("Ви запустили модуль cards, а не імпортували його.")
-    print("Тестування модуля")
+    gui.msgbox("Ви запустили модуль cards, а не імпортували його.")
+    gui.msgbox("Тестування модуля")
     card1 = Card("T", Card.SUITS[0])
     card2 = UnPrintableCard("T", Card.SUITS[1])
     card3 = Positionable_Card("T", Card.SUITS[2])
-    print(f"Об'єкт Card: {card1}")
-    print(f"Об'єкт UnPrintableCard: {card2}")
-    print(f"Об'єкт Positionable_Card: {card3}")
+    gui.msgbox(f"Об'єкт Card: " + str(card1))
+    gui.msgbox(f"Об'єкт UnPrintableCard:"  + str(card2))
+    gui.msgbox(f"Об'єкт Positionable_Card:" + str(card3))
     card3.flip()
-    print(f"Перевернутий об'єкт Positionable_Card {card3}")
+    gui.msgbox(f"Перевернутий об'єкт Positionable_Card" + str(card3))
     deck1 = Deck()
-    print(f"Створено нову колоду: {deck1}")
+    gui.msgbox(f"Створено нову колоду:"  + str(deck1))
     deck1.populate()
-    print(f"У колоді з'явилися карти:\n{deck1}", sep = "\n")
+    gui.msgbox(f"У колоді з'явилися карти:"  + str(deck1))
     deck1.shuffle()
-    print(f"Перемішана колода:\n{deck1}", sep="\n")
+    gui.msgbox(f"Перемішана колода:" +str(deck1))
     hand1 = Hand()
     hand2 = Hand()
     deck1.deal(hands=(hand1, hand2), per_hand=5)
-    print("Роздано по 5 карт")
-    print(f"Рука1: {hand1}")
-    print(f"Рука2: {hand2}")
-    print(f"Залишилось в колоді: {deck1}", sep = "\n")
+    gui.msgbox("Роздано по 5 карт")
+    gui.msgbox(f"Рука1 " + {hand1})
+    gui.msgbox(f"Рука2:" + {hand2})
+    gui.msgbox(f"Залишилось в колоді: {deck1}", sep = "\n")
     deck1.clear()
-    print(f"Колода очищена {deck1}")
+    gui.msgbox(f"Колода очищена {deck1}")
