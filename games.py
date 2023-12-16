@@ -1,18 +1,16 @@
+import easygui as gui
 
-def ask_yes_no(question: str):
-    response = ""
-    while response.lower() not in ("y", "n"):
-        response = input(question + "y/n? ".lower())
-    return response
+def ask_yes_no(question, title = "Game"):
+    return gui.ynbox(question + "? ", title)
 
-def ask_number(question: str, low: int, high: int):
+def ask_number(question, low, high, title= "Game"):
     response = 0
     while response not in range(low, high+1):
         response = int(input(question))
-    return response
+    return gui.integerbox(question, title, default=int((low+high)/2), lowerbound=low, upperbound = high)
 
 if __name__ == "__main__":
-    print("Ви запустили модуль games, а не імпортували його")
-    print("Тестування модуля ...")
-    print(f"Функція ask_yes_no повернула: {ask_yes_no('Продовжуємо тестування ...')}")
-    print(f"Функція ask_number повернула: {ask_number('Введіть число від 1 до 10: ', 1, 10)}")
+    gui.msgbox("Ви запустили модуль games, а не імпортували його")
+    gui.msgbox("Тестування модуля ...")
+    gui.msgbox(f"Функція ask_yes_no повернула: {ask_yes_no('Продовжуємо тестування ...')}")
+    gui.msgbox(f"Функція ask_number повернула: {ask_number('Введіть число від 1 до 10: ', 1, 10)}")
