@@ -76,17 +76,19 @@ class BJ_Hand(cards.Hand):
         return self.total > 21
 
     def show_message(self, message):
-        gui.msgbox(str(self) + "\n" + message, TITLE)
+        gui.buttonbox(message, choices=["Ok"], images=self.card_images, title=TITLE)
 
 
 class BJ_Player(BJ_Hand):
     """Гравець у Блек-джек."""
 
     def is_hitting(self):
-        response = games.ask_yes_no(
-            str(self) + "\n" + self.name + ", братимете ще карти"
+        response = gui.buttonbox(
+            f"{self.name}, братимете ще карти ({self.total}) ?",
+            choices=["Yes", "No"],
+            images=self.card_images,
         )
-        return response
+        return response == "Yes"
 
     def bust(self):
         self.show_message(self.name + " перебрав(ла).")
@@ -148,8 +150,7 @@ class BJ_Game:
         self.deck.deal(self.players + [self.dealer], per_hand=2)
         self.dealer.flip_first_card()
         # перша з карт, зданих дилеру, перевертається
-        message = "\n".join(str(player) for player in self.players + [self.dealer])
-        gui.msgbox(message, TITLE)
+        self.dealer.show_message("Починаємо гру, Дилер оримав такі карти:")
 
         # роздавання додаткових карт гравцям
         for player in self.players:
@@ -170,7 +171,9 @@ class BJ_Game:
                 for player in self.still_playing:
                     player.win()
             else:
-                self.dealer.show_message(self.dealer.name + " набрав додаткові карти.")
+                self.dealer.show_message(
+                    f"{self.dealer.name} набрав додаткові карти {self.dealer.total}."
+                )
                 # порівнюємо суми очок у дилера
                 # та у гравців, що залишилися у грі
                 for player in self.still_playing:
